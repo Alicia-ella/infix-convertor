@@ -24,7 +24,53 @@ Reverse the result
 ### Postfix
 function toPostfix(infix):
 output = ""
-stack = empty
+stack = empty# Infix Converter
+
+Converts infix expressions to **Postfix** and **Prefix** using Java.
+
+## 1. Workflow
+
+- Read the infix expression left to right
+- Operand → add to output
+- ( → push to stack
+- ) → pop stack to output until ( is found
+- Operator → pop higher or equal precedence operators first, then push
+- After scanning → pop all remaining operators to output
+- For Prefix: reverse infix, swap brackets, apply postfix, reverse result
+
+## 2. Pseudocode
+
+### Postfix
+    function toPostfix(infix):
+      output = ""
+      stack = empty
+      for each token in infix:
+        if operand: output += token
+        if ( : push to stack
+        if ) : pop to output until (
+        if operator: pop higher/equal precedence, then push
+      pop remaining stack to output
+      return output
+
+### Prefix
+    function toPrefix(infix):
+      reverse infix
+      swap ( with ) and vice versa
+      result = toPostfix(reversed)
+      return reverse(result)
+
+## 3. How to Run
+
+    javac InfixConverter.java
+    java InfixConverter
+
+## 4. Sample Output
+
+| Infix     | Postfix | Prefix  |
+|-----------|---------|---------|
+| A+B*C     | ABC*+   | +A*BC   |
+| (A+B)*C   | AB+C*   | *+ABC   |
+
 for each token in infix:
 if token is operand:
 output += token
